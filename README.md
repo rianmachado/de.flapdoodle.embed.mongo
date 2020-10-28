@@ -62,7 +62,7 @@ Snapshots (Repository http://oss.sonatype.org/content/repositories/snapshots)
 	<dependency>
 		<groupId>de.flapdoodle.embed</groupId>
 		<artifactId>de.flapdoodle.embed.mongo</artifactId>
-		<version>2.2.1-SNAPSHOT</version>
+		<version>3.0.0-SNAPSHOT</version>
 	</dependency>
 
 ### Gradle
@@ -90,32 +90,29 @@ Support for Linux, Windows and MacOSX.
 
 ### Usage
 ```java
-	import de.flapdoodle.embed.mongo.config.ArtifactStoreBuilder;
+MongodStarter starter = MongodStarter.getDefaultInstance();
 
-	...
-	MongodStarter starter = MongodStarter.getDefaultInstance();
+int port = Network.getFreeServerPort();
+MongodConfig mongodConfig = MongodConfig.builder()
+    .version(Version.Main.PRODUCTION)
+    .net(new Net(port, Network.localhostIsIPv6()))
+    .build();
 
-	String bindIp = "localhost";
-	int port = 12345;
-	IMongodConfig mongodConfig = new MongodConfigBuilder()
-		.version(Version.Main.PRODUCTION)
-		.net(new Net(bindIp, port, Network.localhostIsIPv6()))
-		.build();
+MongodExecutable mongodExecutable = null;
+try {
+  mongodExecutable = starter.prepare(mongodConfig);
+  MongodProcess mongod = mongodExecutable.start();
 
-	MongodExecutable mongodExecutable = null;
-	try {
-		mongodExecutable = starter.prepare(mongodConfig);
-		MongodProcess mongod = mongodExecutable.start();
+  try (MongoClient mongo = new MongoClient("localhost", port)) {
+    DB db = mongo.getDB("test");
+    DBCollection col = db.createCollection("testCol", new BasicDBObject());
+    col.save(new BasicDBObject("testDoc", new Date()));
+  }
 
-		MongoClient mongo = new MongoClient(bindIp, port);
-		DB db = mongo.getDB("test");
-		DBCollection col = db.createCollection("testCol", new BasicDBObject());
-		col.save(new BasicDBObject("testDoc", new Date()));
-
-	} finally {
-		if (mongodExecutable != null)
-			mongodExecutable.stop();
-	}
+} finally {
+  if (mongodExecutable != null)
+    mongodExecutable.stop();
+}
 ```
 
 ### Usage - Optimization
