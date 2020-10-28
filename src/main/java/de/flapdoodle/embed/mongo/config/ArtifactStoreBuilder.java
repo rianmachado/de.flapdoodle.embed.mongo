@@ -23,7 +23,9 @@ package de.flapdoodle.embed.mongo.config;
 import de.flapdoodle.embed.mongo.Command;
 import de.flapdoodle.embed.process.extract.UUIDTempNaming;
 import de.flapdoodle.embed.process.io.directories.PropertyOrPlatformTempDir;
-import de.flapdoodle.embed.process.store.Downloader;
+import de.flapdoodle.embed.process.store.ArtifactStore;
+import de.flapdoodle.embed.process.store.CachingArtifactStore;
+import de.flapdoodle.embed.process.store.UrlConnectionDownloader;
 
 @Deprecated
 /**
@@ -31,13 +33,15 @@ import de.flapdoodle.embed.process.store.Downloader;
  * @author mosmann
  *
  */
-public class ArtifactStoreBuilder extends de.flapdoodle.embed.process.store.ArtifactStoreBuilder {
+public class ArtifactStoreBuilder {
 
-	public ArtifactStoreBuilder defaults(Command command) {
-		tempDir().setDefault(new PropertyOrPlatformTempDir());
-		executableNaming().setDefault(new UUIDTempNaming());
-		download().setDefault(new DownloadConfigBuilder().defaultsForCommand(command).build());
-		downloader().setDefault(new Downloader());
-		return this;
+	public static CachingArtifactStore defaults(Command command) {
+		return ArtifactStore.builder()
+			.tempDirFactory(new PropertyOrPlatformTempDir())
+			.executableNaming(new UUIDTempNaming())
+			.downloadConfig(Defaults.downloadConfigFor(command).build())
+			.downloader(new UrlConnectionDownloader())
+			.build()
+			.withCache();
 	}
 }

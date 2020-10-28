@@ -20,23 +20,39 @@
  */
 package de.flapdoodle.embed.mongo.config;
 
-public interface IMongoDumpConfig extends IMongoConfig {
-   public boolean isVerbose();
-   public String getDatabaseName();
-   public String getCollectionName();
+import org.immutables.value.Value.Default;
 
-   public String getQuery();
-   public String getQueryFile();
-   public String getReadPreference();
-   public boolean isForceTableScan();
+import de.flapdoodle.embed.mongo.distribution.IFeatureAwareVersion;
+import de.flapdoodle.embed.process.config.ExecutableProcessConfig;
 
-   public String getArchive();
-   public boolean isDumpDbUsersAndRoles();
-   public boolean isGzip();
-   public boolean isRepair();
-   public String getOut();
-   public boolean isOplog();
-   public String getExcludeCollection();
-   public String getExcludeCollectionWithPrefix();
-   public Integer getNumberOfParallelCollections();
+public interface MongoCommonConfig extends ExecutableProcessConfig {
+	@Override
+	public IFeatureAwareVersion version();
+
+	@Default
+	default Timeout timeout() {
+		return new Timeout();
+	}
+
+	@Default
+	default Net net() {
+		return Net.defaults();
+	}
+
+	@Default
+	default MongoCmdOptions cmdOptions() {
+		return MongoCmdOptions.defaults();
+	}
+
+	@Default
+	default String password() {
+		return "";
+	}
+
+	@Default
+	default String userName() {
+		return "";
+	}
+
+    String pidFile();    
 }
