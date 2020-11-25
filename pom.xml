@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
@@ -12,7 +14,7 @@
 	<artifactId>de.flapdoodle.embed.mongo</artifactId>
 	<name>Flapdoodle Embedded MongoDB</name>
 	<version>1.50.6-SNAPSHOT</version>
-    <packaging>bundle</packaging>
+	<packaging>bundle</packaging>
 
 	<description>A embedded mongodb ...</description>
 	<url>http://github.com/flapdoodle-oss/embedmongo.flapdoodle.de</url>
@@ -43,8 +45,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.5.1</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.8</source>
+					<target>1.8</target>
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
@@ -85,15 +87,15 @@
 				</configuration>
 			</plugin>
 
-			<plugin>
+			<!-- <plugin>
 				<groupId>com.mycila</groupId>
 				<artifactId>license-maven-plugin</artifactId>
 				<version>2.6</version>
 				<configuration>
-					<!-- <basedir>${basedir}</basedir> -->
+					<basedir>${basedir}</basedir>
 					<header>${basedir}/src/etc/header.txt</header>
 					<validHeaders>
-						<validHeader>${basedir}/src/etc/header-manual-can-yaman.txt</validHeader> 
+						<validHeader>${basedir}/src/etc/header-manual-can-yaman.txt</validHeader>
 					</validHeaders>
 					<quiet>false</quiet>
 					<failIfMissing>true</failIfMissing>
@@ -104,24 +106,31 @@
 						<include>**/test/**</include>
 					</includes>
 					<excludes>
-						<exclude>src/etc/**</exclude> 
-						<exclude>target/**</exclude> 
-						<exclude>.clover/**</exclude> 
-					</excludes> 
+						<exclude>src/etc/**</exclude>
+						<exclude>target/**</exclude>
+						<exclude>.clover/**</exclude>
+					</excludes>
 					<useDefaultExcludes>true</useDefaultExcludes>
-					<!-- <mapping> <jwc>XML_STYLE</jwc> <application>XML_STYLE</application> 
-						<myFileExtension>JAVADOC_STYLE</myFileExtension> </mapping> <useDefaultMapping>true</useDefaultMapping> -->
+					<mapping>
+						<jwc>XML_STYLE</jwc>
+						<application>XML_STYLE</application>
+						<myFileExtension>JAVADOC_STYLE</myFileExtension>
+					</mapping>
+					<useDefaultMapping>true</useDefaultMapping>
 					<properties>
 						<lic.year>2011</lic.year>
 						<lic.email>michael@mosmann.de</lic.email>
 						<lic.username>Michael Mosmann</lic.username>
 						<lic.email2>m.joehren@googlemail.com</lic.email2>
 						<lic.username2>Martin Jöhren</lic.username2>
-						<lic.developers>konstantin-ba@github,Archimedes Trajano	(trajano@github)</lic.developers>
+						<lic.developers>konstantin-ba@github,Archimedes Trajano
+							(trajano@github)</lic.developers>
 					</properties>
 					<encoding>UTF-8</encoding>
-					<!-- <headerDefinitions> <headerDefinition>def1.xml</headerDefinition> 
-						<headerDefinition>def2.xml</headerDefinition> </headerDefinitions> -->
+					<headerDefinitions>
+						<headerDefinition>def1.xml</headerDefinition>
+						<headerDefinition>def2.xml</headerDefinition>
+					</headerDefinitions>
 				</configuration>
 				<executions>
 					<execution>
@@ -130,7 +139,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
@@ -171,10 +180,10 @@
 				</executions>
 			</plugin>
 
-           	<plugin>
+			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
-				<version>2.3.7</version>
+				<version>4.2.1</version>
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
@@ -187,7 +196,6 @@
 				</configuration>
 			</plugin>
 
-<!--
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
@@ -195,7 +203,6 @@
 					<skip>true</skip>
 				</configuration>
 			</plugin>
-		
 			<plugin>
 				<groupId>org.sonatype.plugins</groupId>
 				<artifactId>nexus-staging-maven-plugin</artifactId>
@@ -214,15 +221,14 @@
 					<serverId>sonatype.nexus</serverId>
 					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
 					<stagingRepositoryId>de.flapdoodle</stagingRepositoryId>
-					<deployUrl>https://oss.sonatype.org/service/local/staging/deploy/maven2</deployUrl>
-					<! - -
-										 https://oss.sonatype.org/service/local/staging/deploy/maven2/de/flapdoodle/embed/de.flapdoodle.embed.mongo/1.33/de.flapdoodle.embed.mongo-1.33-sources.jar.asc
-										 - - >
+					<deployUrl>https://oss.sonatype.org/service/local/staging/deploy/maven2</deployUrl> 
+				<!-- https://oss.sonatype.org/service/local/staging/deploy/maven2/de/flapdoodle/embed/de.flapdoodle.embed.mongo/1.33/de.flapdoodle.embed.mongo-1.33-sources.jar.asc 
+				-->
 					<description>${project.version}</description>
 				</configuration>
 			</plugin>
--->
-		
+
+
 		</plugins>
 	</build>
 
@@ -288,7 +294,7 @@
 			org.slf4j
 		</osgi.import>
 	</properties>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -303,13 +309,8 @@
 			<version>1.50.2</version>
 		</dependency>
 
-<!--
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.7.10</version>
-		</dependency>
--->
+		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-api</artifactId> 
+			<version>1.7.10</version> </dependency> -->
 		<dependency>
 			<groupId>org.mongodb</groupId>
 			<artifactId>mongo-java-driver</artifactId>

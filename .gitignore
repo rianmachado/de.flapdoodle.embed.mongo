@@ -5,6 +5,7 @@ velocity.log
 .classpath
 .project
 .settings
+.factorypath
 .externalToolBuilders
 .idea
 .gradle

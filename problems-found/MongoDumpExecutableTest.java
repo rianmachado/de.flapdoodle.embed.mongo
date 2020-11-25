@@ -26,6 +26,7 @@ import de.flapdoodle.embed.process.config.IRuntimeConfig;
 import de.flapdoodle.embed.process.runtime.Network;
 import junit.framework.TestCase;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +38,7 @@ public class MongoDumpExecutableTest extends TestCase {
 
    private static final Logger _logger = LoggerFactory.getLogger(MongoDumpExecutableTest.class.getName());
 
-   @Test
+   //@Test
    public void testStartMongoDump() throws IOException, InterruptedException {
 
       int serverPort = Network.getFreeServerPort();

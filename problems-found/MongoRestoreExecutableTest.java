@@ -26,6 +26,7 @@ import de.flapdoodle.embed.process.config.IRuntimeConfig;
 import de.flapdoodle.embed.process.runtime.Network;
 import junit.framework.TestCase;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +38,7 @@ public class MongoRestoreExecutableTest extends TestCase {
    private static final Logger _logger = LoggerFactory.getLogger(MongoRestoreExecutableTest.class.getName());
    private static final String _archiveFileCompressed = "foo.archive.gz";
 
-   @Test
+   //@Test
    public void testStartMongoRestore() throws IOException, InterruptedException {
 
       final int serverPort = Network.getFreeServerPort();
